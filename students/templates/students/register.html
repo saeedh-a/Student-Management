@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link  href="https://cdn.jsdelivr.net/npm/bootsrap25.3.2/dist/css/bootsrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+    <h2>Register</h2>
+    <form Method="POST">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+    <p>Already have an account?<a href="{% url 'login' %}">Login</a></p>
+</body>
+</html>

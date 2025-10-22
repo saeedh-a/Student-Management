@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link  href="https://cdn.jsdelivr.net/npm/bootsrap25.3.2/dist/css/bootsrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+    <h2>Dashboard</h2>
+    <div class="card twxt-white bg-priary mb-3" style="max-width: 18rem;">
+        <div class="card-header">Total Student</div>
+        <div class="card-body"><h5 class="card-title">{{ total_students}}</h5></div>
+    </div>
+    <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+    
+</body>
+</html>
