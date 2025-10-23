@@ -1,0 +1,15 @@
+
+body{
+    background-color: #f7f9fc;
+    font-family: 'poppins' sans-serif;
+}
+
+.container{
+    max-width: 900px;
+}
+card{
+    border-radius: 12px;
+}
+.btn{
+    border-radius: 8px;
+}

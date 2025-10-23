@@ -4,13 +4,16 @@ from .import views as v
 from  .views import StudentAPI
 
 urlpatterns=[
-    path('', v.student_list, name='student_list'),
-    path('add/', v.student_create, name='student_create'),
-    path('student_update/<int:id>/', v.student_update, name='student_update'),
-    path('student_delete/<int:id>/', v.student_delete, name='student_delete'),
+    path('', v.home, name='home'),
+    path('students/', v.student_list, name='student_list'),
+    path('students/add/', v.add_student, name='add_student'),
+    path('students/edit/<int:pk>/', v.edit_student, name='edit_student'),
+    path('students/delete/<int:pk>/', v.delete_student, name='delete_student'),
     path('login/', v.LoginView,name='login'),
     path('logout/', v.logoutView, name='logout'),
     path('register/', v.register, name='register'),
     path('dashboard/', v.dashboard, name='dashboard'),
-    path('students/' , StudentAPI.as_view())
+    path('students/' , StudentAPI.as_view()),
+    path('base/', v.base, name='base'),
+    
 ]

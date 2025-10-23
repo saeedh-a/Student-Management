@@ -9,35 +9,45 @@ from .serializers import StudentSerializer
 from rest_framework.response import Response
 # Create your views here.
 
-@login_required
+
 def student_list(request):
-    students=Student.objects.all()
+    students=Student.objects.all().order_by('id')
     return render(request,'students/student_list.html',{'students':students})
 
 @login_required
-def student_create(request):
-    form=StudentForm(request.POST )
-    if form.is_valid():
-        form.save()
-        return redirect('student_list')
-    return render(request,'students/student_form.html',{'form':form})
+def add_student(request):
+    if request.method=='POST':
+      form=StudentForm(request.POST )
+      if form.is_valid():
+         form.save()
+         return redirect('student_list')
+      else:
+         print(form.errors)
+    else:
+        form=StudentForm()
+    return render(request,'students/add_student.html',{'form':form})
 
 @login_required
-def student_update(request , id):
-    student= get_object_or_404(Student, id=id)
-    form=StudentForm(request.POST , instance=student)
-    if form.is_valid():
-        form.save()
-        return redirect('student_list')
-    return render(request,'students/student_form.html',{'form':form})
+def edit_student(request, pk):
+    student= get_object_or_404(Student, pk=pk)
+    if request.method=='POST':
+       form=StudentForm(request.POST , instance=student)
+       if form.is_valid():
+         form.save()
+         return redirect('student_list')
+       else:
+        print(form.errors)
+    else:
+        form=StudentForm (instance=student)
+    return render(request,'students/edit_student.html',{'student':student})
 
 @login_required
-def student_delete(request , id):
-    student= get_object_or_404(Student, id=id)
+def delete_student(request , pk):
+    student= get_object_or_404(Student, pk=pk)
     if request.method=="POST":
         student.delete()
         return redirect('student_list')
-    return render(request,'students/student_confirm_delete.html',{'student':student})
+    return render(request,'students/delete_student.html',{'student':student})
 
 
 def register(request):
@@ -45,9 +55,9 @@ def register(request):
         form=UserRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            username=form.cleaned_data.get('username')
-            messages.success(request, f'Account created for {username} ! You can now log in .')
+            messages.success(request, ' Account created successfully! You can now log in .')
             return redirect('login')
+        else:print("Form Validation Failed! Errors:",form.errors)
     else:
             form=UserRegistrationForm()
     return render(request, 'students/register.html', {'form':form})
@@ -64,6 +74,7 @@ def LoginView(request):
             username=form.cleaned_data.get('username')
             password=form.cleaned_data.get('password')
             user=authenticate(username=username, password=password)
+
             if user is not None:
                 login(request,user)
             return redirect('student_list')
@@ -73,10 +84,17 @@ def LoginView(request):
     
 def logoutView(request):
     logout(request)
-    return redirect('dashboard')
+    messages.info(request, 'You have been logged out.')
+    return redirect('login')
 
 class StudentAPI(APIView):
     def get (self, request):
       students=Student.objects.all()  
       serializer=StudentSerializer (students, many=True)  
       return Response(serializer.data)
+
+def home(request):
+    return render (request, 'students/home.html ')
+
+def base(request):
+    return render(request, 'students/base.html')

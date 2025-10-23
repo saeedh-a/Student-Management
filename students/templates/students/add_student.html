@@ -1,3 +1,5 @@
+{% extends 'students/base.html' %}
+{%  block title %} Add Students{% endblock %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,12 +9,14 @@
     <title>Student Form</title>
 </head>
 <body>
-    <h2>Add / Edit Studnet</h2>
+    {% block content%}
+    <h2>Add Studnet</h2>
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p}}
         <button type="submit">save</button>
+         <a href="{% url 'student_list'%}" class="btn" style="background:#94a3b8 ;">Cancel</a>
     </form>
-    <a href="{% url 'student_list'%}">Back</a>
+   {%endblock%}
 </body>
 </html>
