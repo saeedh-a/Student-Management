@@ -1,0 +1,26 @@
+
+{% extends 'students/base.html' %}
+{% load static %}
+{%  block title %}Profile{% endblock %}
+
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-lg p-4 ma-auto "style='max: width 600px;'>
+    <div class="text-center mb-4"><img src="{% static 'images/profile.png' %}" alt="profile" class="rounded-circle shadow-sm" width="100" height="100">
+        <h3>{{ user.username|title}}</h3>
+        <p>{{ user.email }}</p>
+    </div>
+    <hr>
+    <div class="mb-3">
+        <p><strong>Username:</strong>{{ user.email}}</p>
+        <p><strong>Date_Joined:</strong>{{user.date_joined|date:"M d, Y" }}</p>
+        <p><strong>Last Login:</strong>{{ user.last_login|date: "M d, Y H:i" }}</p>
+    </div>
+    <div class="text-center mt-4">
+        <a href="{% url 'logout' %}" class="btn btn-outline-danger">Logout</a>
+        <a href="{% url 'home' %}" class="btn btn-primary px-4 ms-2"></a>Back To Home</a>
+    </div>
+  </div>
+</div>
+{%endblock%}

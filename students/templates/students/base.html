@@ -21,9 +21,9 @@
         <div class="collaps navbar-collaps" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 {% if user.is_authenticated %} 
-                <li class="nav-item"><a href="{% url 'student_list' %}" class="nav-link">Student</a></li>
-                <li class="nav-item"><a href="{% url 'add_student' %}" class="nav-link">Add Student</a></li>
-                <li class="nav-item"><a href="#">Hi {{ user.username}}</a></li>
+                <li class="nav-item"><a href="{% url 'student_list' %}" class="nav-link">Students</a></li>
+                <li class="nav-item"><a href="{% url 'add_student' %}" class="nav-link">Add Students</a></li>
+                <li class="nav-item"><a href="{% url 'profile' %}">Hi {{ user.username|title}}</a></li>
                 <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link text-danger">Logout</a></li>
                 {% else %}
                 <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Login</a></li>

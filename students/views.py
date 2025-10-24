@@ -7,6 +7,7 @@ from django.contrib.auth import  login, authenticate,logout
 from rest_framework.views import APIView
 from .serializers import StudentSerializer
 from rest_framework.response import Response
+from django.utils import timezone
 # Create your views here.
 
 
@@ -62,10 +63,9 @@ def register(request):
             form=UserRegistrationForm()
     return render(request, 'students/register.html', {'form':form})
 
-
-def dashboard(request):
-    total_students= Student.objects.count()
-    return render (request, 'students/dashboard.html',{'total_students':total_students})
+@login_required
+def profile_view(request):
+    return render (request, 'students/profile.html')
 
 def LoginView(request):
     if request.method=="POST":

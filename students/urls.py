@@ -12,7 +12,7 @@ urlpatterns=[
     path('login/', v.LoginView,name='login'),
     path('logout/', v.logoutView, name='logout'),
     path('register/', v.register, name='register'),
-    path('dashboard/', v.dashboard, name='dashboard'),
+    path('profile/', v.profile_view, name='profile'),
     path('students/' , StudentAPI.as_view()),
     path('base/', v.base, name='base'),
     
